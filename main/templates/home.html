@@ -1,0 +1,59 @@
+{% extends 'blog/base.html' %}
+{% block content%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product_List</title>
+    
+    <style type="text/css">
+
+        body {
+          font-family:'12롯데마트행복Bold';
+          font-size:10pt;
+        }
+        
+        </style>
+</head>
+
+<body>
+    
+    <br><br>
+    <div class="container">
+    <center>
+        <a href="{% url 'main:data_list' %}"><img src= "/static/img/data.png" alt="데이터베이스"width="40"  ></img></a>
+        &nbsp &nbsp &nbsp &nbsp
+        <a href="{% url 'main:upload_image'%}"><img src= "/static/img/search.png" alt="이미지 업로드"width="150"  ></img></a>
+    </center>
+    <br><br>
+    <img src= "/static/img/product.png" alt="제품"width="55"  >
+    <br><br>
+    {% if code_list %}
+    <ul>
+        {% for codes in code_list %}
+            <h1><a href="{% url 'main:product_detail' codes.code %}">{{ codes.name }}</a></h1>
+            <p>바코드 : {{ codes.code }}</p>
+            <p>가  격 : {{ codes.charge }}won</p>
+            <p>등록일자 : {{ codes.pub_date }}</p>
+            <br>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>자료가 없습니다.</p>
+    {% endif %}
+    </div>
+
+
+    </body>
+</html>
+
+{% endblock content %}
